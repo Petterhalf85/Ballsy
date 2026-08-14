@@ -1,9 +1,10 @@
-import { Anton, Space_Grotesk } from "next/font/google";
+import { Fraunces, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
-const anton = Anton({
+const fraunces = Fraunces({
   subsets: ["latin"],
-  weight: "400",
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
   variable: "--font-display",
   display: "swap",
 });
@@ -23,7 +24,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${anton.variable} ${spaceGrotesk.variable}`}>
+    <html lang="en" className={`${fraunces.variable} ${spaceGrotesk.variable}`}>
       <body>{children}</body>
     </html>
   );
