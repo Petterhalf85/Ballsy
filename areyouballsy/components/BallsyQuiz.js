@@ -129,7 +129,11 @@ export default function BallsyQuiz() {
     const challengeLevel = weakest ? starsFor(weakest.pct) : null;
     const bonusLevel = starsFor(pct);
 
-    return { tier, ringBell, ranked, top3, topType, weakest, challengeLevel, bonusLevel };
+    const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+    const challengeText = weakest ? pick(challengeBank[weakest.cat][challengeLevel - 1]) : null;
+    const bonusText = pick(achievementChallenges[bonusLevel - 1]);
+
+    return { tier, ringBell, ranked, top3, topType, weakest, challengeLevel, bonusLevel, challengeText, bonusText };
   }, [phase, pct, catSubtotals, run.catMax]);
 
   const scrollToQuiz = () => {
@@ -306,11 +310,9 @@ export default function BallsyQuiz() {
                     <div className="challenge-stars">
                       {"★".repeat(result.challengeLevel) + "☆".repeat(3 - result.challengeLevel)}
                     </div>
-                    <p className="challenge-text">
-                      {challengeBank[result.weakest.cat][result.challengeLevel - 1]}
-                    </p>
+                    <p className="challenge-text">{result.challengeText}</p>
                     <div className="challenge-bonus">
-                      <b>Feeling extra bold?</b> {achievementChallenges[result.bonusLevel - 1]}
+                      <b>Feeling extra bold?</b> {result.bonusText}
                     </div>
                   </div>
                 )}

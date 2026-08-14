@@ -42,10 +42,10 @@ export const bank = {
     },
   ],
   "Career Courage": [
-    { id: "KA001", text: "I apply for positions even when I do not meet all the requirements.", options: [{ label: "Yes", score: 5 }, { label: "No", score: 1 }], dir: "explicit", weight: 5, difficulty: 4 },
-    { id: "KA004", text: "I can hold a strong opinion on an issue even when I am unsure whether I am right.", options: [{ label: "Yes", score: 5 }, { label: "No", score: 1 }], dir: "explicit", weight: 2, difficulty: 1 },
+    { id: "KA001", text: "I apply for positions even when I do not meet all the requirements.", options: ["Very often", "Often", "Neutral", "Rarely", "Very rarely"], dir: "desc", weight: 5, difficulty: 4 },
+    { id: "KA004", text: "I can hold a strong opinion on an issue even when I am unsure whether I am right.", options: ["Very often", "Often", "Neutral", "Rarely", "Very rarely"], dir: "desc", weight: 2, difficulty: 1 },
     { id: "KA005", text: "It is not important for me to promote myself; I would rather let others shine.", options: ["Very often", "Often", "Neutral", "Rarely", "Very rarely"], dir: "asc", weight: 2, difficulty: 1 },
-    { id: "KA007", text: "Have you ever stayed in a job primarily because it felt safe?", options: [{ label: "Yes", score: 1 }, { label: "No", score: 5 }], dir: "explicit", weight: 4, difficulty: 3 },
+    { id: "KA007", text: "I stay in jobs primarily because they feel safe.", options: ["Very often", "Often", "Neutral", "Rarely", "Very rarely"], dir: "asc", weight: 4, difficulty: 3 },
     {
       id: "KA011", text: "Your dream job is posted. You meet about 70% of the requirements. What do you do?", options: [
         { label: "I don't apply because I don't meet all the requirements.", score: 1 },
@@ -193,56 +193,176 @@ export const tiers = [
 // "Achievement" isn't a scored quiz category — it's a bonus track always offered.
 export const challengeBank = {
   "Social Courage": [
-    "Say hi to a stranger.",
-    "Start a conversation and keep it going for 2 minutes.",
-    "Go to an event alone, or ask someone out on a date.",
+    [
+      "Say hi to a stranger.",
+      "Make eye contact and hold a smile for 3 seconds longer than feels comfortable.",
+      "Compliment someone you don't know.",
+    ],
+    [
+      "Start a conversation and keep it going for 2 minutes.",
+      "Ask a stranger for a recommendation — a book, a dish, a route — and actually use it.",
+      "Sit with a group of strangers instead of finding a quiet corner.",
+    ],
+    [
+      "Go to an event alone, or ask someone out on a date.",
+      "Walk into a room where you know no one and leave with someone's number.",
+      "Introduce yourself to the person in the room you'd normally avoid.",
+    ],
   ],
   "Conflict Courage": [
-    "Say no to something you don't actually want to do.",
-    "Bring up a small frustration with someone instead of sitting on it.",
-    "Have the difficult conversation you've been putting off.",
+    [
+      "Say no to something you don't actually want to do.",
+      "Correct someone who got a fact about you wrong, out loud.",
+      "Tell someone, kindly, that their joke landed wrong.",
+    ],
+    [
+      "Bring up a small frustration with someone instead of sitting on it.",
+      "Push back on a decision you disagree with, in the meeting where it's being made.",
+      "Ask for what you actually want instead of what's easiest to ask for.",
+    ],
+    [
+      "Have the difficult conversation you've been putting off.",
+      "Confront the person you've been avoiding since the last disagreement.",
+      "End something — a habit, a deal, a relationship — that isn't working, out loud, today.",
+    ],
   ],
   "Career Courage": [
-    "Share an idea you've been sitting on.",
-    "Ask someone for honest feedback.",
-    "Present an idea to leadership.",
+    [
+      "Share an idea you've been sitting on.",
+      "Post the take you keep deleting before you hit send.",
+      "Ask a colleague what they think you're actually bad at.",
+    ],
+    [
+      "Ask someone for honest feedback.",
+      "Message the person who can greenlight your idea and send it to them.",
+      "Put your hand up for the project everyone else is avoiding.",
+    ],
+    [
+      "Present an idea to leadership.",
+      "Apply for the role you don't feel fully qualified for.",
+      "Ask for the raise, title, or opportunity you've been quietly hoping someone offers you first.",
+    ],
   ],
   "Adventure Seeking": [
-    "Visit somewhere you've never been.",
-    "Try a new activity.",
-    "Travel alone on a short trip somewhere unfamiliar.",
+    [
+      "Visit somewhere you've never been.",
+      "Order the dish on the menu you can't pronounce.",
+      "Take a different route home and see where it leads.",
+    ],
+    [
+      "Try a new activity.",
+      "Say yes to a plan before you know all the details.",
+      "Do something today you'd normally put off until 'someday.'",
+    ],
+    [
+      "Travel alone on a short trip somewhere unfamiliar.",
+      "Book something with no easy way to back out.",
+      "Go somewhere that makes you a little nervous just thinking about it.",
+    ],
   ],
   "Physical Courage": [
-    "Take an ice-cold shower.",
-    "Push through a hard group workout.",
-    "Do something physical that genuinely scares you.",
+    [
+      "Take an ice-cold shower.",
+      "Do the exercise you always skip.",
+      "Walk somewhere in weather you'd normally avoid.",
+    ],
+    [
+      "Push through a hard group workout.",
+      "Try a sport or activity that intimidates you.",
+      "Sign up for a physical challenge with a deadline.",
+    ],
+    [
+      "Do something physical that genuinely scares you.",
+      "Sign up for something you can't back out of once it's booked.",
+      "Push your body somewhere it hasn't been before.",
+    ],
   ],
   "Emotional Courage": [
-    "Share something personal with someone you trust.",
-    "Ask for help with something.",
-    "Have an honest conversation about a difficult topic.",
+    [
+      "Share something personal with someone you trust.",
+      "Tell someone what you actually appreciate about them.",
+      "Admit out loud when you're wrong about something.",
+    ],
+    [
+      "Ask for help with something.",
+      "Tell someone how they made you feel, without softening it.",
+      "Say 'I'm not okay' to someone instead of 'I'm fine.'",
+    ],
+    [
+      "Have an honest conversation about a difficult topic.",
+      "Tell someone the truth you've been protecting them from.",
+      "Say the thing you're most afraid will change how someone sees you.",
+    ],
   ],
   "Romantic Courage": [
-    "Give someone a genuine compliment.",
-    "Show interest in someone instead of holding back.",
-    "Ask someone you like out for coffee or a date.",
+    [
+      "Give someone a genuine compliment.",
+      "Text the person you've been meaning to text.",
+      "Make the first move in a small way — a look, a comment, a laugh.",
+    ],
+    [
+      "Show interest in someone instead of holding back.",
+      "Tell someone you like them before you've talked yourself out of it.",
+      "Plan the date instead of waiting to be asked.",
+    ],
+    [
+      "Ask someone you like out for coffee or a date.",
+      "Say how you feel before you know how they'll respond.",
+      "End the almost — ask the question that turns 'maybe' into a real answer.",
+    ],
   ],
   "Moral Courage": [
-    "Share an honest opinion, even if it's not the popular one.",
-    "Defend a viewpoint you believe in.",
-    "Speak up about an injustice you see.",
+    [
+      "Share an honest opinion, even if it's not the popular one.",
+      "Correct someone gently when they say something you know is wrong.",
+      "Say what you actually think instead of what's easiest to agree with.",
+    ],
+    [
+      "Defend a viewpoint you believe in.",
+      "Push back when a group starts piling on someone unfairly.",
+      "Tell a friend the truth they don't want to hear.",
+    ],
+    [
+      "Speak up about an injustice you see.",
+      "Report or challenge something wrong, even knowing it costs you socially.",
+      "Take the side that isn't popular because it's the right one.",
+    ],
   ],
   "Life Courage": [
-    "Write down one change you know you need to make.",
-    "Take the first concrete step toward it.",
-    "Follow through on a decision you've been putting off.",
+    [
+      "Write down one change you know you need to make.",
+      "Cancel or start the thing you've been putting off for a month.",
+      "Say out loud, to yourself, what you actually want right now.",
+    ],
+    [
+      "Take the first concrete step toward it.",
+      "Set a deadline for the change you wrote down, and tell someone else what it is.",
+      "Spend an hour today on the thing you keep deprioritizing.",
+    ],
+    [
+      "Follow through on a decision you've been putting off.",
+      "Make the change, not just the plan for it.",
+      "Do the hard, boring, necessary thing before the day is over.",
+    ],
   ],
 };
 
 export const achievementChallenges = [
-  "Do the one thing you've been putting off.",
-  "Enter a competition.",
-  "Take on a demanding project.",
+  [
+    "Do the one thing you've been putting off.",
+    "Text back the message you've been avoiding.",
+    "Finish the task you keep bumping to tomorrow.",
+  ],
+  [
+    "Enter a competition.",
+    "Sign up for something with a real audience.",
+    "Put your work somewhere it can be judged.",
+  ],
+  [
+    "Take on a demanding project.",
+    "Commit to something bigger than what feels comfortable right now.",
+    "Go after the goal you've been treating as a someday.",
+  ],
 ];
 
 /* ---------------------------------------------------------------
