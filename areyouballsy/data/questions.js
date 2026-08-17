@@ -135,8 +135,7 @@ export const bank = {
     { id: "L003", text: "How long have you known you need to make a change but haven't acted on it?", options: ["Less than 1 month", "1–6 months", "6–12 months", "1–3 years", "Over 3 years"], dir: "desc", weight: 4, difficulty: 4 },
     { id: "L004", text: "What does it cost you to do nothing?", options: ["Nothing", "A little", "Some", "A lot", "A great deal"], dir: "asc", weight: 5, difficulty: 5 },
     { id: "L005", text: "Are you more afraid of change or of staying where you are?", options: ["Much more afraid of change", "Slightly more afraid of change", "Equally afraid of both", "Slightly more afraid of stagnation", "Much more afraid of stagnation"], dir: "asc", weight: 5, difficulty: 5 },
-    { id: "L006", text: "Dare you to start over?", options: ["Never", "Probably not", "Maybe", "Probably", "Absolutely"], dir: "asc", weight: 5, difficulty: 5 },
-    { id: "L007", text: "You get the opportunity to start completely over. New city. New job. New people. What do you feel first?", options: ["Fear", "Resistance", "Uncertain curiosity", "Excitement", "Enthusiasm"], dir: "asc", weight: 4, difficulty: 4 },
+    { id: "L006", text: "Would you walk away from something stable if you knew, deep down, it wasn't right for you?", options: ["Never", "Probably not", "Maybe", "Probably", "Absolutely"], dir: "asc", weight: 5, difficulty: 5 },
     { id: "L009", text: "What would the people closest to you say you are afraid of?", options: ["Don't know", "One small thing", "Several small things", "One big thing", "Something that's holding me back"], dir: "desc", weight: 4, difficulty: 5 },
   ],
   "Fear Profile": [
