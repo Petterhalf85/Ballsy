@@ -344,6 +344,27 @@ h1 em {
 .panel {
   padding: 28px 30px 34px;
 }
+.back-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-bottom: 12px;
+  font-family: var(--font-body), sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sage);
+  cursor: pointer;
+  transition: color 0.12s ease;
+}
+.back-btn:hover {
+  color: var(--gold-bright);
+}
+.back-btn:focus-visible {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: 2px;
+}
 .progress-row {
   display: flex;
   align-items: center;
@@ -416,6 +437,10 @@ h1 em {
   background: var(--pine-800);
   border-color: var(--gold);
   transform: translateX(4px);
+}
+.opt.selected {
+  background: rgba(215, 162, 74, 0.12);
+  border-color: var(--gold-bright);
 }
 .opt:focus-visible {
   outline: 2px solid var(--gold-bright);

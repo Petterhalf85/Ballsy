@@ -19,25 +19,22 @@ function initState() {
   return {
     run,
     current: 0,
-    catSubtotals: run.catSubtotals,
-    totalScore: 0,
+    answers: new Array(run.questions.length).fill(null),
     phase: "quiz", // 'quiz' | 'result'
   };
 }
 
 function reducer(state, action) {
   if (action.type === "ANSWER") {
-    const { q, idx } = action;
-    const rawScore = scoreForIndex(q, idx);
-    const subscore = rawScore * q.weight * q.difficulty;
-    const totalScore = state.totalScore + subscore;
-    const catSubtotals = {
-      ...state.catSubtotals,
-      [q.cat]: state.catSubtotals[q.cat] + subscore,
-    };
-    const current = state.current + 1;
+    const { index, idx } = action;
+    const answers = state.answers.slice();
+    answers[index] = idx;
+    const current = index + 1;
     const phase = current >= state.run.questions.length ? "result" : "quiz";
-    return { ...state, current, catSubtotals, totalScore, phase };
+    return { ...state, answers, current, phase };
+  }
+  if (action.type === "BACK") {
+    return { ...state, current: Math.max(0, state.current - 1) };
   }
   if (action.type === "RETAKE") {
     return initState();
@@ -87,8 +84,21 @@ function BallsyMark({ className, width, height }) {
 
 export default function BallsyQuiz() {
   const [state, dispatch] = useReducer(reducer, undefined, initState);
-  const { run, current, catSubtotals, totalScore, phase } = state;
+  const { run, current, answers, phase } = state;
   const [showWhy, setShowWhy] = useState(false);
+
+  const { catSubtotals, totalScore } = useMemo(() => {
+    const catSubtotals = { ...run.catSubtotals };
+    let totalScore = 0;
+    run.questions.forEach((q, i) => {
+      const idx = answers[i];
+      if (idx == null) return;
+      const subscore = scoreForIndex(q, idx) * q.weight * q.difficulty;
+      catSubtotals[q.cat] += subscore;
+      totalScore += subscore;
+    });
+    return { catSubtotals, totalScore };
+  }, [run, answers]);
 
   const pct = run.maxScore > 0 ? Math.min(100, (totalScore / run.maxScore) * 100) : 0;
   const q = run.questions[current];
@@ -242,6 +252,15 @@ export default function BallsyQuiz() {
           <div className="panel">
             {phase === "quiz" && q && (
               <div className="quiz-body">
+                {current > 0 && (
+                  <button
+                    type="button"
+                    className="back-btn"
+                    onClick={() => dispatch({ type: "BACK" })}
+                  >
+                    ← Back
+                  </button>
+                )}
                 <div className="progress-row">
                   <span className="progress-text">
                     Question {current + 1} of {run.questions.length}
@@ -260,8 +279,8 @@ export default function BallsyQuiz() {
                     <button
                       key={idx}
                       type="button"
-                      className="opt"
-                      onClick={() => dispatch({ type: "ANSWER", q, idx })}
+                      className={`opt${answers[current] === idx ? " selected" : ""}`}
+                      onClick={() => dispatch({ type: "ANSWER", index: current, idx })}
                     >
                       {optionLabel(q, idx)}
                     </button>
