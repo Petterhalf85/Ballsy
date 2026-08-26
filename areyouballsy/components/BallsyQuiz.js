@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useReducer, useState } from "react";
+import { track } from "@vercel/analytics";
 import {
   bank,
   archetypes,
@@ -147,12 +148,21 @@ export default function BallsyQuiz() {
     return { tier, ringBell, ranked, top3, topType, weakest, challengeLevel, bonusLevel, challengeText, bonusText };
   }, [phase, pct, catSubtotals, run.catMax]);
 
+  useEffect(() => {
+    if (phase === "result" && result) {
+      track("Quiz Completed", { type: result.topType, tier: result.tier.name, score: Math.round(pct) });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [phase]);
+
   const scrollToQuiz = () => {
     document.getElementById("quiz")?.scrollIntoView({ behavior: "smooth" });
   };
 
   const handleShare = async () => {
     if (!result) return;
+    const method = navigator.share ? "native" : "clipboard";
+    track("Share Result Clicked", { method, type: result.topType });
     const text = `I'm a ${result.topType} — ${Math.round(pct)}% Ballsy Score. Are you ballsy?`;
     const url = window.location.origin;
     if (navigator.share) {
@@ -302,7 +312,10 @@ export default function BallsyQuiz() {
                       key={idx}
                       type="button"
                       className={`opt${answers[current] === idx ? " selected" : ""}`}
-                      onClick={() => dispatch({ type: "ANSWER", index: current, idx })}
+                      onClick={() => {
+                        if (current === 0 && answers[0] == null) track("Quiz Started");
+                        dispatch({ type: "ANSWER", index: current, idx });
+                      }}
                     >
                       {optionLabel(q, idx)}
                     </button>
