@@ -603,8 +603,34 @@ h1 em {
   color: var(--gold-bright);
 }
 
-.retake {
+.result-actions {
   margin-top: 8px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.share {
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+  color: var(--pine-950);
+  border: none;
+  border-radius: 4px;
+  padding: 12px 26px;
+  font-family: var(--font-body), sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.share:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(215, 162, 74, 0.25);
+}
+.share:focus-visible {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: 3px;
+}
+.retake {
   background: transparent;
   color: var(--gold-bright);
   border: 1px solid rgba(215, 162, 74, 0.45);

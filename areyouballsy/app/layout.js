@@ -17,10 +17,26 @@ const spaceGrotesk = Space_Grotesk({
   display: "swap",
 });
 
+const title = "AreYouBallsy? — Discover Your Courage";
+const description =
+  "Ballsy isn't about being fearless. Ballsy is about what you do when you're afraid. Take the 33-question courage test.";
+
 export const metadata = {
-  title: "AreYouBallsy? — Discover Your Courage",
-  description:
-    "Ballsy isn't about being fearless. Ballsy is about what you do when you're afraid. Take the 33-question courage test.",
+  metadataBase: new URL("https://areyouballsy.com"),
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    url: "https://areyouballsy.com",
+    siteName: "AreYouBallsy?",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
 };
 
 export default function RootLayout({ children }) {

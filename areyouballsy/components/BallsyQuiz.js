@@ -86,6 +86,7 @@ export default function BallsyQuiz() {
   const [state, dispatch] = useReducer(reducer, undefined, initState);
   const { run, current, answers, phase } = state;
   const [showWhy, setShowWhy] = useState(false);
+  const [shareState, setShareState] = useState("idle"); // 'idle' | 'copied'
 
   const { catSubtotals, totalScore } = useMemo(() => {
     const catSubtotals = { ...run.catSubtotals };
@@ -148,6 +149,27 @@ export default function BallsyQuiz() {
 
   const scrollToQuiz = () => {
     document.getElementById("quiz")?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleShare = async () => {
+    if (!result) return;
+    const text = `I'm a ${result.topType} — ${Math.round(pct)}% Ballsy Score. Are you ballsy?`;
+    const url = window.location.origin;
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: "AreYouBallsy?", text, url });
+      } catch {
+        // user cancelled the native share sheet — nothing to do
+      }
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(`${text} ${url}`);
+      setShareState("copied");
+      setTimeout(() => setShareState("idle"), 2000);
+    } catch {
+      // clipboard permission denied — nothing to do
+    }
   };
 
   return (
@@ -336,9 +358,14 @@ export default function BallsyQuiz() {
                   </div>
                 )}
 
-                <button type="button" className="retake" onClick={() => dispatch({ type: "RETAKE" })}>
-                  Step Up Again
-                </button>
+                <div className="result-actions">
+                  <button type="button" className="share" onClick={handleShare}>
+                    {shareState === "copied" ? "Copied!" : "Share Result"}
+                  </button>
+                  <button type="button" className="retake" onClick={() => dispatch({ type: "RETAKE" })}>
+                    Step Up Again
+                  </button>
+                </div>
               </div>
             )}
           </div>
